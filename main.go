@@ -17,13 +17,15 @@ import (
 
 var wait_group sync.WaitGroup
 
-var method *string = flag.String("method", "", "GET or POST")
+var flag_method *string = flag.String("method", "", "GET or POST")
 
 var flag_get_urls_file *string = flag.String("get_urls", "", "the urls filename for GET requests")
 var flag_post_host *string = flag.String("post_url", "", "the url for POST requests. for example: http://127.0.0.1:80/")
-var flag_post_data_file *string = flag.String("flag_post_data_file", "", "the data filename for POST")
+var flag_post_data_file *string = flag.String("post_data_file", "", "the data filename for POST")
 var flag_coroutine_number *int  = flag.Int("coroutine_number", 0, "the coroutine_number for every http request")
-var flag_loop_count *int = flag.Int("", 0, "the count for looping")
+var flag_loop_count *int = flag.Int("loop_count", 0, "the count for looping")
+var flag_verbose *bool = flag.Bool("verbose", false, "verbose , if verbose is true, printing more details")
+var flag_post_body_type *string = flag.String("post_body_type", "text/plain", "")
 
 func exitAfterUsage() {
 	flag.Usage()
@@ -48,7 +50,10 @@ func runHttpGet(url string){
         glog.Error(err)
         return
     }
-	glog.Info(string(content))
+	glog.Infof("%s response body size %d", res.Status, len(content))
+    if *flag_verbose {
+        glog.Info(string(content))
+    }
 }
 
 func runHttpPost(url string, content_type string, filename string) {
@@ -99,18 +104,18 @@ func getLinesFromFile(filename string) []string {
 func main() {
 	flag.Parse()
 	defer wait_group.Wait()
-	if *method == "" {
+	if *flag_method == "" {
 		glog.Error("you should set option -method ")
 		exitAfterUsage()
 	}
-	if *method == "GET" {
+	if *flag_method == "GET" {
 		urls := getLinesFromFile(*flag_get_urls_file)
 		for _, url := range urls {
 			glog.Error(url)
 			wait_group.Add(1)
 			go runHttpGet(url)
 		}
-	} else if *method == "POST" {
-        go runHttpPost(*flag_post_host, "text/plain", *flag_post_data_file)
+	} else if *flag_method == "POST" {
+        go runHttpPost(*flag_post_host, *flag_post_body_type, *flag_post_data_file)
 	}
 }
