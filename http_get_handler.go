@@ -16,7 +16,7 @@ func httpGetHandler() {
         for i := 0; i < *flag_loop_count; i++ {
             glog.Info(url)
             wait_group.Add(1)
-            get_urls_chan<- url
+            get_urls_chan <- url
         }
     }
 }

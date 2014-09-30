@@ -22,7 +22,6 @@ func readContent(res *http.Response) ([]byte, error) {
     return contents, err
 }
 
-
 func getLinesFromFile(filename string) []string {
 	var lines = make([]string, 0)
 	file, err := os.Open(filename)

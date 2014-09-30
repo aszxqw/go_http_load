@@ -2,18 +2,24 @@ package main
 
 import (
     "net/http"
-    "os"
-    "bufio"
+    //"bufio"
+    "strings"
+    "io/ioutil"
     "github.com/golang/glog"
+    //"fmt"
 )
 
 type postArgs struct {
     Url string
-    BodyType string
-    Filename string
+    BodyContent string
 }
 
 func httpPostHandler() {
+    var post_data_chan chan postArgs = make(chan postArgs, *flag_coroutine_number)
+    glog.Infof("post_data_chan size %d", *flag_coroutine_number)
+    for  i:= 0; i < *flag_coroutine_number; i++ {
+        go httpPostChanWorker(post_data_chan)
+    }
     if *flag_post_url == "" {
         glog.Error("post_url must not be empty.")
         exitAfterUsage()
@@ -22,9 +28,20 @@ func httpPostHandler() {
         glog.Error("post_data_file must not be empty.")
         exitAfterUsage()
     }
-    wait_group.Add(1)
-    var args postArgs = postArgs{*flag_post_url, *flag_post_body_type, *flag_post_data_file}
-    go httpPostWorker(args)
+    body_content, err  := ioutil.ReadFile(*flag_post_data_file)
+    if err != nil {
+        glog.Error(err)
+        exitAfterUsage()
+    }
+    var args postArgs = postArgs {
+        *flag_post_url,
+        string(body_content),
+    }
+    for i := 0; i < *flag_loop_count; i++ {
+        glog.Info(*flag_post_url)
+        wait_group.Add(1)
+        post_data_chan <- args
+    }
 }
 
 func httpPostChanWorker(post_chan <-chan postArgs) {
@@ -34,21 +51,13 @@ func httpPostChanWorker(post_chan <-chan postArgs) {
 }
 
 func httpPostWorker(args postArgs) {
-    var url string = args.Url
-    var content_type string = args.BodyType
-    var filename string = args.Filename
-
 	defer wait_group.Done()
 
-	file, err := os.Open(filename)
-	if err != nil {
-		glog.Error(err)
-        return
-	}
-	defer file.Close()
+    var url string = args.Url
+    var body_content string = args.BodyContent
 
-	rd := bufio.NewReader(file)
-	res, err := http.Post(url, content_type, rd)
+    rd := strings.NewReader(body_content)
+	res, err := http.Post(url, *flag_post_body_type, rd)
 	if err != nil {
 		glog.Error(err)
 		return
