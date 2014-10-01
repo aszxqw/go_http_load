@@ -1,8 +1,8 @@
-package main
+package httpload
 
 import (
     "os"
-    "flag"
+    //"flag"
     "io/ioutil"
     "net/http"
     "bufio"
@@ -11,10 +11,6 @@ import (
 	"github.com/golang/glog"
 )
 
-func exitAfterUsage() {
-	flag.Usage()
-	os.Exit(1)
-}
 
 func readContent(res *http.Response) ([]byte, error) {
     defer res.Body.Close()
@@ -27,7 +23,7 @@ func getLinesFromFile(filename string) []string {
 	file, err := os.Open(filename)
 	if err != nil {
 		glog.Error(err)
-		exitAfterUsage()
+        return lines
 	}
 	defer file.Close()
 
