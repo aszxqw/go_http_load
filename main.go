@@ -5,9 +5,9 @@ import (
 	//"time"
 	//"reflect"
 	"flag"
+	"github.com/aszxqw/go_http_load/httpload"
 	"github.com/golang/glog"
-    "github.com/aszxqw/go_http_load/httpload"
-    "os"
+	"os"
 	//"fmt"
 )
 
@@ -22,17 +22,23 @@ func exitAfterUsage() {
 
 func main() {
 	flag.Parse()
-    f := flag.Lookup("alsologtostderr")
-    if f.DefValue == f.Value.String() {
-        flag.Set("alsologtostderr", "true")
-    }
+	f := flag.Lookup("alsologtostderr")
+	if f.DefValue == f.Value.String() {
+		flag.Set("alsologtostderr", "true")
+	}
 	if *flag_method == "" {
 		glog.Error("you should set option -method ")
 		exitAfterUsage()
 	}
-	if *flag_method == "GET" {
-        httpload.NewGetHandler().Run()
-	} else if *flag_method == "POST" {
-        httpload.NewPostHandler().Run()
+	var handler httpload.HandlerInterface
+	switch *flag_method {
+	case "GET":
+		handler = httpload.NewGetHandler()
+	case "POST":
+		handler = httpload.NewPostHandler()
+    default:
+        glog.Error("-method is illegal.")
+        exitAfterUsage()
 	}
+	handler.Run()
 }
