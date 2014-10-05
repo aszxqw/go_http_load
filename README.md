@@ -1,5 +1,8 @@
 # go_http_load
 
+[![Build Status](https://travis-ci.org/aszxqw/go_http_load.svg?branch=master)](https://travis-ci.org/aszxqw/go_http_load)
+[![GoDoc](https://godoc.org/github.com/aszxqw/go_http_load?status.svg)](https://godoc.org/github.com/aszxqw/go_http_load)
+
 ## 简介
 
 HTTP服务的压力测试工具(using golang)。
