@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/aszxqw/go_http_load.svg?branch=master)](https://travis-ci.org/aszxqw/go_http_load)
 [![GoDoc](https://godoc.org/github.com/aszxqw/go_http_load?status.svg)](https://godoc.org/github.com/aszxqw/go_http_load)
+[![RTD](https://readthedocs.org/projects/go-http-load/badge/?version=latest)](http://go-http-load.readthedocs.org/en/latest/)
 
 ## 简介
 
