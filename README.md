@@ -28,7 +28,7 @@ HTTP GET
 
 ```
 go_http_load -method=GET -get_urls="urls"
-go_http_load -method=GET -get_urls="urls" -loop_count=4 -lcoroutine_number=2
+go_http_load -method=GET -get_urls="urls" -loop_count=4 -coroutine_number=2
 ```
 
 HTTP POST
