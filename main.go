@@ -1,3 +1,4 @@
+//See https://github.com/aszxqw/go_http_load/blob/master/README.md
 package main
 
 import (
