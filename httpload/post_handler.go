@@ -19,11 +19,11 @@ type PostHandler struct {
 
 func NewPostHandler() *PostHandler {
     this := new(PostHandler)
-    this.dataChan = make(chan postArgs, *flag_coroutine_number)
-    for  i:= 0; i < *flag_coroutine_number; i++ {
+    this.dataChan = make(chan postArgs, *flag_goroutines)
+    for  i:= 0; i < *flag_goroutines; i++ {
         go this.chanWork()
     }
-    glog.V(2).Infof("dataChan buffer size %d", *flag_coroutine_number)
+    glog.V(2).Infof("dataChan buffer size %d", *flag_goroutines)
     return this
 }
 

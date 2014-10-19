@@ -16,11 +16,11 @@ type GetHandler struct {
 
 func NewGetHandler() *GetHandler{
     this := new(GetHandler)
-    this.urlChan = make(chan string, *flag_coroutine_number)
-    for i := 0; i < *flag_coroutine_number; i++ {
+    this.urlChan = make(chan string, *flag_goroutines)
+    for i := 0; i < *flag_goroutines; i++ {
         go this.chanWork()
     }
-    glog.V(2).Infof("urlChan buffer size %d", *flag_coroutine_number)
+    glog.V(2).Infof("urlChan buffer size %d", *flag_goroutines)
     return this
 }
 

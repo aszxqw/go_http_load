@@ -22,10 +22,10 @@ func exitAfterUsage() {
 
 func main() {
 	flag.Parse()
-	f := flag.Lookup("alsologtostderr")
-	if f.DefValue == f.Value.String() {
-		flag.Set("alsologtostderr", "true")
-	}
+	//f := flag.Lookup("alsologtostderr")
+	//if f.DefValue == f.Value.String() {
+	//	flag.Set("alsologtostderr", "true")
+	//}
 	if *flag_method == "" {
 		glog.Error("you should set option -method ")
 		exitAfterUsage()
