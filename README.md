@@ -4,36 +4,38 @@
 [![GoDoc](https://godoc.org/github.com/aszxqw/go_http_load?status.svg)](https://godoc.org/github.com/aszxqw/go_http_load)
 [![RTD](https://readthedocs.org/projects/go-http-load/badge/?version=latest)](http://go-http-load.readthedocs.org/en/latest/)
 
-## 简介
+## Introduction
 
-HTTP服务的压力测试工具(using golang)。
+http load testing tool (using golang)。
 
-## 用法
-
-### 下载和安装
+## Usage
 
 ```
 go get github.com/aszxqw/go_http_load
 ```
 
-### 显示用法
+### Show Usage
 
 ```
 go_http_load
 ```
 
-### 示例
+### Example
 
 HTTP GET
 
 ```
 go_http_load -method=GET -get_urls="urls"
-go_http_load -method=GET -get_urls="urls" -loop_count=4 -coroutine_number=2
+go_http_load -method=GET -get_urls="urls" -loop_count=100 -goroutines=2
 ```
 
 HTTP POST
 
 ```
 go_http_load -method=POST -post_url="http://127.0.0.1:11267" -post_data_file=README.md
+go_http_load -method=POST -post_url="http://127.0.0.1:11267" -post_data_file=README.md -loop_count=100 -goroutines=2
 ```
 
+## Contact
+
+`wuyanyi09@foxmail.com`

@@ -40,7 +40,7 @@ func (this *GetHandler) Run() {
     fmt.Printf("The Number of Queries:%d\n", sum)
     consumed := time.Now().Sub(start)
     fmt.Printf("The Time Consumed: %.3f s\n", consumed.Seconds())
-    fmt.Printf("Query Per Second: %.3f q/s\n", float64(sum) / consumed.Seconds() )
+    fmt.Printf("Query Per Second: %.3f qps\n", float64(sum) / consumed.Seconds() )
 }
 
 func (this *GetHandler) chanWork() {
