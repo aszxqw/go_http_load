@@ -1,7 +1,7 @@
 # go_http_load
 
-[![Build Status](https://travis-ci.org/aszxqw/go_http_load.svg?branch=master)](https://travis-ci.org/aszxqw/go_http_load)
-[![GoDoc](https://godoc.org/github.com/aszxqw/go_http_load?status.svg)](https://godoc.org/github.com/aszxqw/go_http_load)
+[![Build Status](https://travis-ci.org/yanyiwu/go_http_load.svg?branch=master)](https://travis-ci.org/yanyiwu/go_http_load)
+[![GoDoc](https://godoc.org/github.com/yanyiwu/go_http_load?status.svg)](https://godoc.org/github.com/yanyiwu/go_http_load)
 [![RTD](https://readthedocs.org/projects/go-http-load/badge/?version=latest)](http://go-http-load.readthedocs.org/en/latest/)
 
 ## Introduction
@@ -11,7 +11,7 @@ http load testing tool (using golang)。
 ## Usage
 
 ```
-go get github.com/aszxqw/go_http_load
+go get github.com/yanyiwu/go_http_load
 ```
 
 ### Show Usage

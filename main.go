@@ -1,12 +1,12 @@
-//See https://github.com/aszxqw/go_http_load/blob/master/README.md
+//See https://github.com/yanyiwu/go_http_load/blob/master/README.md
 package main
 
 import (
 	//"time"
 	//"reflect"
 	"flag"
-	"github.com/aszxqw/go_http_load/httpload"
 	"github.com/golang/glog"
+	"github.com/yanyiwu/go_http_load/httpload"
 	"os"
 	//"fmt"
 )
@@ -36,9 +36,9 @@ func main() {
 		handler = httpload.NewGetHandler()
 	case "POST":
 		handler = httpload.NewPostHandler()
-    default:
-        glog.Error("-method is illegal.")
-        exitAfterUsage()
+	default:
+		glog.Error("-method is illegal.")
+		exitAfterUsage()
 	}
 	handler.Run()
 }
